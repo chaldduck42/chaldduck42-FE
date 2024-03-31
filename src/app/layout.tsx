@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import TanstackProvider from './components/providers/TanstackProvider'
-import RecoilRootProvider from './components/providers/RecoilRootProvider'
+import TanstackProvider from '@/components/providers/TanstackProvider'
+import RecoilRootProvider from '@/components/providers/RecoilRootProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import DashBoard from '@/app/components/dashboard'
+import DashBoard from '@/components/dashboard'
 
 describe('Dashboard', () => {
   it('shourd dashboard ', () => {
