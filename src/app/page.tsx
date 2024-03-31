@@ -1,13 +1,14 @@
+'use client'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
+import { sampleAtom } from './recoil/atom'
 
 const Home = () => {
+  const sample = useRecoilValue(sampleAtom)
+
   return (
     <div>
-      <div>ㅋㅋ</div>
-
-      <div>으어</div>
-      <div>하이</div>
-      <div>허스키테스트추가</div>
+      <div>Recoil 값: {sample}</div>
     </div>
   )
 }
