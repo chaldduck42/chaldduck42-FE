@@ -17,7 +17,9 @@
 | 컴포넌트 테스트 라이브러리 | Storybook        |
 | 오류 체크                  | sentry           |
 
+#폴더구조
 
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/a5593314-9384-4e17-a350-19af4a9f6f52/52843221-61bd-4921-a0e9-5fc6bafc74c8/Untitled.png)
 
 # GitHub 이슈 작성
 ## 개요
