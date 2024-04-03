@@ -17,9 +17,25 @@
 | 컴포넌트 테스트 라이브러리 | Storybook        |
 | 오류 체크                  | sentry           |
 
-#폴더구조
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/a5593314-9384-4e17-a350-19af4a9f6f52/52843221-61bd-4921-a0e9-5fc6bafc74c8/Untitled.png)
+# 폴더구조
+```
+📦public
+📦src
+ ┣ 📂app
+ ┃ ┣ 📜favicon.ico
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┗ 📜page.tsx
+ ┣ 📂assets
+ ┣ 📂components
+ ┣ 📂hooks
+ ┣ 📂lib
+ ┣ 📂services
+ ┣ 📂stores
+ ┣ 📂test
+ ┣ 📂types
+ ┗ 📂utils
+ ```
 
 # GitHub 이슈 작성
 ## 개요
@@ -86,6 +102,24 @@
 
 </details>
 
+# 브랜치 전략 - Github Flow
+2가지의 브랜치만 사용
+
+1. master => 현재 서비스 배포중인 브랜치
+2. feature => feature, release, hotfix의 역할을 함
+
+항상 master에서 분기하여 feature을 만든 뒤, PR을 올려서 확인 받고 테스트 해본 뒤에 master에 merge
+
+# 브랜치 컨벤션
+
+1. issue에 브랜치 생성 목적을 적습니다.
+2. 브랜치명은 < feature/home-ui > 이런식으로 정확하게 무슨 기능인지 명확하게 적어줍니다.
+3. 기능개발이 완료되면 PR을 올립니다. ( 이때, PR에 자신이 만든 코드를 간단하게 코드리뷰하여 적습니다.)
+4. 코드리뷰와 PR을 보고 코멘트를 달거나, 토의를 합니다.
+5. 아무 문제가 없으면 최소 1명이상의 사람이 승인 시, Merge을 합니다.
+
+
+<자세한 내용은 Frontend 회의록 참고>
 
 # 코드리뷰
 ## 개요
