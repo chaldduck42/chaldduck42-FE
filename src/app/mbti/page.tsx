@@ -8,8 +8,7 @@ const Home = () => {
 
   return (
     <div>
-      <div>Recoil 값: {sample}</div>
-      <a href="/input">내 사주 알아보기</a>
+      <div>내 성격과 유사한 값을 입력하는 설문조사 페이지 입니다</div>
     </div>
   )
 }

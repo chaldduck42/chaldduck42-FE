@@ -8,8 +8,12 @@ const Home = () => {
 
   return (
     <div>
-      <div>Recoil 값: {sample}</div>
-      <a href="/input">내 사주 알아보기</a>
+      <div>내 결과를 조회하는 페이지 입니다</div>
+      <div>카카오톡으로 공유하기</div>
+      <div>링크복사</div>
+      <div>이미지저장</div>
+
+      <a href="/">처음으로</a>
     </div>
   )
 }
