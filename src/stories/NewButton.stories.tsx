@@ -17,14 +17,24 @@ type Story = StoryObj<typeof Button>
 
 export const Large: Story = {
   args: {
-    size: 'large',
+    width: '80',
+    height: '14',
     label: 'Large',
+  },
+}
+
+export const Medium: Story = {
+  args: {
+    width: '44',
+    height: '14',
+    label: 'Medium',
   },
 }
 
 export const Small: Story = {
   args: {
-    size: 'small',
+    width: '20',
+    height: '12',
     label: 'Small',
   },
 }

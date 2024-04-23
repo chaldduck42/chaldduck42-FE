@@ -2,7 +2,7 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { sampleAtom } from '@/recoil/atom'
-import NewButton from '@/stories/NewButton'
+import Button from '@/components/button/Button'
 
 const Home = () => {
   const sample = useRecoilValue(sampleAtom)
@@ -11,7 +11,7 @@ const Home = () => {
     <div>
       <div>Recoil 값: {sample}</div>
       <a href="/input">내 사주 알아보기</a>
-      <NewButton label="test" size="large" />
+      <Button width="14" height="80" label="hello" />
     </div>
   )
 }
