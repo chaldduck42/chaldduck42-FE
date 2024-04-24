@@ -16,6 +16,8 @@ const config: Config = {
       colors: {
         'Dark-Brown': '#2B1E08',
         Brown: '#453311',
+        Gray: '#C2C2C2',
+        Begie: '#FDFAF5',
       },
     },
   },

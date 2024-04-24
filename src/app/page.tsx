@@ -2,7 +2,7 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { sampleAtom } from '@/recoil/atom'
-import Button from '@/components/button/Button'
+import Button from '@/components/button/DarkButton'
 
 const Home = () => {
   const sample = useRecoilValue(sampleAtom)

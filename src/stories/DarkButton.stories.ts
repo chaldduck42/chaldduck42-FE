@@ -1,10 +1,10 @@
 // Replace your-framework with the name of your framework
 import type { Meta, StoryObj } from '@storybook/react'
-import Button from '../components/button/Button'
+import DarkButton from '../components/button/DarkButton'
 
-const meta: Meta<typeof Button> = {
-  title: 'Button',
-  component: Button,
+const meta: Meta<typeof DarkButton> = {
+  title: 'DarkButton',
+  component: DarkButton,
   parameters: {
     layout: 'centered',
   },
@@ -13,28 +13,25 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<typeof DarkButton>
 
 export const Large: Story = {
   args: {
-    width: '80',
-    height: '14',
+    size: 'large',
     label: 'Large',
   },
 }
 
 export const Medium: Story = {
   args: {
-    width: '44',
-    height: '14',
+    size: 'medium',
     label: 'Medium',
   },
 }
 
 export const Small: Story = {
   args: {
-    width: '20',
-    height: '12',
+    size: 'small',
     label: 'Small',
   },
 }
