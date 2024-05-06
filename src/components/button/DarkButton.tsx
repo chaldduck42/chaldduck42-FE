@@ -11,7 +11,7 @@ function DarkButton({ size, label, state }: ButtonProps) {
   } else if (size === 'medium') {
     sizeClass = 'w-44 h-14'
   } else if (size === 'small') {
-    sizeClass = 'w-20 h-12'
+    sizeClass = 'w-20 h-11'
   }
 
   let stateClass = ''
