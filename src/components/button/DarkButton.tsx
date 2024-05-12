@@ -2,9 +2,10 @@ interface ButtonProps {
   label: string
   size: 'small' | 'medium' | 'large' // size에 대한 타입 지정
   state: 'pressed' | 'disabled'
+  onClick: () => void
 }
 
-function DarkButton({ size, label, state }: ButtonProps) {
+function DarkButton({ size, label, state, onClick }: ButtonProps) {
   let sizeClass = ''
   if (size === 'large') {
     sizeClass = 'w-[335px] h-[56px]'
@@ -25,7 +26,7 @@ function DarkButton({ size, label, state }: ButtonProps) {
 
   const style = `border-[1px] rounded-2xl text-white text-base hover:bg-Brown hover:opacity-100 font-bold ${sizeClass}  ${stateClass}`
   return (
-    <button type="button" className={style}>
+    <button type="button" className={style} onClick={onClick}>
       {label}
     </button>
   )
