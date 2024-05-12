@@ -12,7 +12,8 @@
     "test:watch": "jest --watchAll",
     "coverage": "jest --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_d30efd9a9644cd0"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.28.9",
@@ -48,6 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "autoprefixer": "^10.0.1",
+    "chromatic": "^11.3.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
