@@ -1,11 +1,14 @@
+import React from 'react'
+
 interface ButtonProps {
   label: string
-  size: 'small' | 'medium' | 'large' // size에 대한 타입 지정
+  size: 'small' | 'medium' | 'large'
   state: 'pressed' | 'disabled'
+  type: 'submit' | 'button' | 'reset'
   onClick: () => void
 }
 
-function LightButton({ size, label, state, onClick }: ButtonProps) {
+function LightButton({ size, label, state, type, onClick }: ButtonProps) {
   let sizeClass = ''
   if (size === 'large') {
     sizeClass = 'w-[335px] h-[56px]'
@@ -25,8 +28,9 @@ function LightButton({ size, label, state, onClick }: ButtonProps) {
   }
 
   const style = `border-[1px] rounded-2xl text-base hover:bg-Beige hover:opacity-100 font-bold ${sizeClass}  ${stateClass}`
+
   return (
-    <button type="button" className={style} onClick={onClick}>
+    <button type={type || 'button'} className={style} onClick={onClick}>
       {label} <p className="opacity-20" />
     </button>
   )
