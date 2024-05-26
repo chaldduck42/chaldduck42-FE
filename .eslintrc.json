@@ -25,6 +25,7 @@
     "react/react-in-jsx-scope": "off",
     "lines-around-directive": 0,
     "react/jsx-boolean-value": 0,
+    "react/button-has-type": 1,
     "react/jsx-props-no-spreading": 0,
     "@typescript-eslint/semi": "off",
     "import/no-unresolved": 0,
