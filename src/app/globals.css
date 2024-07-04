@@ -17,6 +17,28 @@
 }
 
 body {
+  .animation-appear {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.3s,
+      transform 0.3s;
+  }
+
+  .animation-appear-inView {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+      format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
 }
 
 @layer utilities {
