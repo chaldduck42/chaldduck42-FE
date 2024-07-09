@@ -22,7 +22,8 @@
     "plugin:storybook/recommended"
   ],
   "rules": {
-    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off", // React가 JSX 스코프에 사용되어야 함을 강제하지 않음
+    "react/react-in-jsx-scope": "off", // JSX 스코프 내에서 React를 import하지 않음
     "lines-around-directive": 0,
     "react/jsx-boolean-value": 0,
     "react/button-has-type": 1,
