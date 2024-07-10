@@ -1,24 +1,32 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
 const Home = () => {
   const router = useRouter()
   const [nickname, setNickname] = useState('')
+  const [nicknameComplete, setNicknameComplete] = useState(false)
   const [birthdate, setBirthdate] = useState('')
+  const [birthdateComplete, setBirthdateComplete] = useState(false)
   const [error, setError] = useState(false)
   const [canStart, setCanStart] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
   const [isNicknameFocused, setIsNicknameFocused] = useState(false)
   const [isBirthdateFocused, setIsBirthdateFocused] = useState(false)
 
+  const nicknameRef = useRef(null)
+  const birthdateRef = useRef(null)
+
   const handleNicknameChange = (event) => {
     const input = event.target.value
-    const koreanCharRegex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g
-    const koreanChars = input.match(koreanCharRegex) || []
+    const koreanCharRegex = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/ // 한글만 허용하는 정규 표현식
 
-    if (koreanChars.length <= 5) {
+    if (koreanCharRegex.test(input) && input.length <= 5) {
       setNickname(input)
+      setNicknameComplete(true)
+    } else if (!koreanCharRegex.test(input)) {
+      event.target.focus()
+      alert('한글만 입력하실 수 있습니다.')
     }
   }
 
@@ -28,6 +36,7 @@ const Home = () => {
       input = input.slice(0, 8)
     }
     setBirthdate(input)
+    setBirthdateComplete(input.length === 8)
   }
 
   const handleBirthdateBlur = () => {
@@ -42,6 +51,7 @@ const Home = () => {
       setBirthdate(
         `${input.slice(0, 4)}.${input.slice(4, 6)}.${input.slice(6, 8)}`,
       )
+      setBirthdateComplete(input.length === 8)
     }
   }
 
@@ -75,11 +85,30 @@ const Home = () => {
   }
 
   const handleNextClick = () => {
-    const isEndingWithBatchim = getRelationship(nickname)
-    const newNM = isEndingWithBatchim ? `${nickname}이랑` : `${nickname}랑`
-    alert(newNM)
+    if (nickname === '' || birthdate === '') {
+      if (nickname === '') {
+        nicknameRef.current.focus()
+      } else if (birthdate === '') {
+        birthdateRef.current.focus()
+      }
+      alert('닉네임과 생년월일을 모두 입력해 주세요.')
+    } else if (birthdate.length < 8) {
+      birthdateRef.current.focus()
+      alert('생년월일을 잘못 입력하셨습니다.')
+    } else if (nicknameComplete && birthdateComplete) {
+      const isEndingWithBatchim = getRelationship(nickname)
+      const newNM = isEndingWithBatchim ? `${nickname}이랑` : `${nickname}랑`
+      alert(
+        '디버그용\n' +
+          '별명 뒤 조사 붙이기 :' +
+          newNM +
+          '\n' +
+          '생년월일 출력 : ' +
+          birthdate,
+      )
 
-    router.push('/mbti')
+      router.push('/mbti')
+    }
   }
 
   useEffect(() => {
@@ -105,6 +134,7 @@ const Home = () => {
             className={`flex justify-start items-center flex-grow-0 flex-shrink-0 w-[335px] h-11 relative gap-[110px] px-3 py-2.5 rounded-xl bg-[#fdfaf5] border ${isNicknameFocused || nickname ? 'border-[#2b1e08]' : 'border-[#c2c2c2]'}`}
           >
             <input
+              ref={nicknameRef}
               type="text"
               placeholder="한글 5자 이하"
               value={nickname}
@@ -123,6 +153,7 @@ const Home = () => {
             className={`flex justify-start items-center flex-grow-0 flex-shrink-0 w-[335px] h-11 relative gap-[110px] px-3 py-2.5 rounded-xl bg-[#fdfaf5] border ${isBirthdateFocused || birthdate ? 'border-[#2b1e08]' : 'border-[#c2c2c2]'}`}
           >
             <input
+              ref={birthdateRef}
               type="text"
               placeholder="2000.01.01"
               value={birthdate}
