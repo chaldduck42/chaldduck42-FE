@@ -70,7 +70,7 @@ const Home: React.FC = () => {
       isTyping: false,
       isBirthdateFocused: false,
     }))
-    let input = state.birthdate.replace(/[^\d]/g, '')
+    const input = state.birthdate.replace(/[^\d]/g, '')
     if (input.length <= 4) {
       setState((prevState) => ({ ...prevState, birthdate: input }))
     } else if (input.length <= 6) {
@@ -138,14 +138,11 @@ const Home: React.FC = () => {
       const newNM = isEndingWithBatchim
         ? `${state.nickname}이랑`
         : `${state.nickname}랑`
-      alert(
-        '디버그용\n' +
-          '별명 뒤 조사 붙이기 :' +
-          newNM +
-          '\n' +
-          '생년월일 출력 : ' +
-          state.birthdate,
-      )
+      alert(`
+        디버그용
+        별명 뒤 조사 붙이기 : ${newNM} 
+        생년월일 출력 : ${state.birthdate}
+      `)
 
       router.push('/mbti')
     }
@@ -160,14 +157,14 @@ const Home: React.FC = () => {
 
   return (
     <div className="w-[375px] h-[740px] relative overflow-hidden bg-gradient-to-b from-[#f9efe1] to-[#fdfaf5]">
-      <div
+      <button
         className={`flex justify-center items-center w-[335px] absolute left-5 top-[513px] gap-2.5 px-6 py-4 rounded-2xl ${state.canStart ? 'bg-[#2b1e08]' : 'bg-[#c2c2c2]'}`}
         onClick={state.canStart ? handleNextClick : handleStartClick}
       >
         <p className="flex-grow w-[287px] h-6 text-base font-bold text-center text-white">
           {state.canStart ? '시작하기' : '내 친구와 궁합보기'}
         </p>
-      </div>
+      </button>
       <div className="flex flex-col justify-start items-start absolute left-5 top-[213px] gap-6">
         <div className="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2">
           <p className="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#2b1e08]">
