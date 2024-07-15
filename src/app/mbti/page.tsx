@@ -1,10 +1,11 @@
 'use client'
+import Link from 'next/link'
 import React from 'react'
 
 const Home = () => {
   return (
     <div>
-      <div>검사하러 가기</div>
+      <Link href="/mbti/1">검사하러 가기</Link>
     </div>
   )
 }
