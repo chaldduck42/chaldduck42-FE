@@ -144,7 +144,7 @@ const Home: React.FC = () => {
         생년월일 출력 : ${state.birthdate}
       `)
 
-      router.push('/mbti')
+      router.push('/mbti/1')
     }
   }
 
@@ -158,6 +158,7 @@ const Home: React.FC = () => {
   return (
     <div className="w-[375px] h-[740px] relative overflow-hidden bg-gradient-to-b from-[#f9efe1] to-[#fdfaf5]">
       <button
+        type="button"
         className={`flex justify-center items-center w-[335px] absolute left-5 top-[513px] gap-2.5 px-6 py-4 rounded-2xl ${state.canStart ? 'bg-[#2b1e08]' : 'bg-[#c2c2c2]'}`}
         onClick={state.canStart ? handleNextClick : handleStartClick}
       >

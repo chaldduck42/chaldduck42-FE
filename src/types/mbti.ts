@@ -1,20 +1,14 @@
-export interface IMbtiQuestionList {
-  id: number
+export interface MbtiList {
+  type: string
+  questions: QuestionList
+}
+
+export interface QuestionList {
   question: string
-  kind: string
+  answers: Answer[]
 }
 
-export interface IMbtiAnswerList {
-  ans_id: number
-  ques_id: number
-  answer: string
+export interface Answer {
+  option: string
   score: number
-}
-
-export interface IMbtiPictureDescription {
-  id: number
-  mbti_1: string
-  mbti_2: string
-  image: string
-  description: string
 }

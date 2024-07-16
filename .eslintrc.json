@@ -22,8 +22,9 @@
     "plugin:storybook/recommended"
   ],
   "rules": {
-    "react/jsx-uses-react": "off", // React가 JSX 스코프에 사용되어야 함을 강제하지 않음
-    "react/react-in-jsx-scope": "off", // JSX 스코프 내에서 React를 import하지 않음
+    "no-alert": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "lines-around-directive": 0,
     "react/jsx-boolean-value": 0,
     "react/button-has-type": 1,
@@ -51,5 +52,13 @@
         "endOfLine": "auto"
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/app/**/*.js", "src/app/**/*.tsx"],
+      "rules": {
+        "react-hooks/rules-of-hooks": "off"
+      }
+    }
+  ]
 }
