@@ -7,9 +7,9 @@ const ProgressNavBar = () => {
   const barWidth = `${(pageNum / 12) * 100}%` // 비율을 퍼센트로 변환
 
   return (
-    <div className="w-full">
+    <div className="w-full h-[46px] border-2 mt-[64px]">
       <div className="flex justify-between text-Dark-Brown">
-        <p className="font-bold text-lg mb-3">{pageNum}/12</p>
+        <p className="font-bold text-lg mb-[8px]">{pageNum}/12</p>
         {pageNum === 6 && <p className="font-bold">벌써 절반이야</p>}
         {pageNum === 12 && <p className="font-bold">마지막 문항이야</p>}
       </div>

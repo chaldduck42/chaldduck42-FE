@@ -1,36 +1,53 @@
-import { MbtiList } from '@/types/mbti'
+import { QuestionList } from '@/types/mbti'
+import { useRouter } from 'next/navigation'
 import React from 'react'
+import 'animate.css'
 
 interface Props {
   id: number
-  info: MbtiList
+  info: QuestionList
+  type: string
 }
 
-const SelectContent = ({ id, info }: Props) => {
+const SelectContent = ({ id, info, type }: Props) => {
+  const router = useRouter()
+  // console.log(info)
+  console.log(type)
+
+  const handlePrev = () => {
+    router.push(`/mbti/${id - 1}`)
+  }
+  const handleNext = () => {
+    console.log('클릭')
+    router.push(`/mbti/${id + 1}`)
+  }
   return (
-    <div className="flex flex-col justify-between items-center h-5/6 pt-20">
-      <div className="text-Dark-Brown text-2xl font-bold">일할 때 나는?</div>
-      <div>
+    <div className="w-full flex flex-col justify-between items-center mt-[56px]">
+      <div className="text-Dark-Brown text-xl font-bold">{info.question}</div>
+      <div className="w-full pt-[94px]">
         <button
           type="button"
-          value={info.questions.question}
-          className="w-full rounded-xl h-16 text-lg font-bold text-Dark-Brown bg-Beige3 mb-12 hover:bg-Dark-Brown hover:text-white"
+          value={info.question}
+          className="w-full rounded-xl min-h-[56px] text-[16px] font-bold text-Dark-Brown bg-Beige3 mb-[32px] hover:bg-Dark-Brown hover:text-white flex justify-start items-center px-[16px] animate__fadeInLeft"
+          onClick={handleNext}
         >
-          남들이 하는대로 따라가는 것이 좋다
+          {info.answers[0].option}
         </button>
         <button
           type="button"
-          className="w-full rounded-xl h-16 text-lg font-bold text-Dark-Brown bg-Beige3 hover:bg-Dark-Brown hover:text-white"
+          className="w-full rounded-xl min-h-[56px] text-[16px] font-bold text-Dark-Brown bg-Beige3 hover:bg-Dark-Brown hover:text-white flex justify-start items-center px-[16px]"
+          onClick={handleNext}
         >
-          스스로 나만의 방법을 만들어 나가는게 좋다
+          {info.answers[1].option}
         </button>
       </div>
-      {id === 1 ? (
+      {id === 0 ? (
         <div className="w-full rounded-xl h-16 " />
       ) : (
         <button
           type="button"
-          className="w-full rounded-xl h-16 text-lg font-bold text-Dark-Brown border-2 border-Dark-Brown hover:bg-Dark-Brown hover:text-white"
+          className="w-full rounded-xl min-h-[56px] text-[16px] font-bold text-Dark-Brown border-[1px] border-Dark-Brown hover:bg-Dark-Brown hover:text-white absolute bottom-[64px]"
+          onClick={handlePrev}
         >
           이전
         </button>
