@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import TanstackProvider from '@/components/providers/TanstackProvider'
 import RecoilRootProvider from '@/components/providers/RecoilRootProvider'
+import MSWComponent from '@/components/msw/MSWComponent'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <MSWComponent />
         <TanstackProvider>
           <RecoilRootProvider>{children}</RecoilRootProvider>
         </TanstackProvider>

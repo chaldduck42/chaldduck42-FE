@@ -14,9 +14,9 @@ const page = () => {
   const setMbtiQestion = useSetRecoilState(mbtiAtom)
 
   useEffect(() => {
-    axios('').then((res) => {
-      setMbtiQestion(res.data.mbti)
-    })
+    axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mbti`).then((res) =>
+      setMbtiQestion(res.data.data),
+    )
   }, [mbtiQuestion])
   return (
     <div className="h-full">
