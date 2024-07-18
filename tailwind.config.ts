@@ -110,6 +110,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  // eslint-disable-next-line
+  plugins: [require('tailwindcss-animated')],
 }
 export default config

@@ -6,7 +6,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="w-full max-w-[600px] px-5  h-full bg-Beige1 ">
+    <div className="w-full max-w-[600px] px-[29px] pt-[48px] h-full bg-Beige1 ">
       {children}
     </div>
   )
