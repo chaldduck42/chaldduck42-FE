@@ -13,7 +13,7 @@ const page = () => {
   const [info, setInfo] = useState<QuestionList>()
 
   useEffect(() => {
-    axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mbti`).then((res) => {
+    axios(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/questions`).then((res) => {
       const data = res?.data.data
       const category = Math.floor(id / 3)
       const question = Math.floor(id % 3)

@@ -1,4 +1,6 @@
 import { QuestionList } from '@/types/mbti'
+import mbtiCaculate from '@/utils/mbtiCalculate'
+import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -16,9 +18,16 @@ const SelectContent = ({ id, info, type }: Props) => {
   const handlePrev = () => {
     router.push(`/mbti/${id - 1}`)
   }
-  const handleNext = () => {
-    console.log('클릭')
-    router.push(`/mbti/${id + 1}`)
+  const handleNext = (score: string) => {
+    console.log('hello')
+    localStorage.setItem(String(id), score)
+    if (id === 12) {
+      const result = mbtiCaculate()
+      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, result)
+      console.log(result)
+    } else {
+      router.push(`/mbti/${id + 1}`)
+    }
   }
   return (
     <div className="w-full flex flex-col justify-between items-center mt-[56px]">
@@ -28,21 +37,22 @@ const SelectContent = ({ id, info, type }: Props) => {
       <div className="w-full pt-[94px]">
         <button
           type="button"
-          value={info.question}
+          value={info.answers[0].score}
           className="w-full rounded-xl min-h-[56px] text-[16px] font-bold text-Dark-Brown bg-Beige3 mb-[32px] hover:bg-Dark-Brown hover:text-white flex justify-start items-center px-[16px] animate-fade-left"
-          onClick={handleNext}
+          onClick={() => handleNext(String(info.answers[0].score))}
         >
           {info.answers[0].option}
         </button>
         <button
           type="button"
+          value={info.answers[1].score}
           className="w-full rounded-xl min-h-[56px] text-[16px] font-bold text-Dark-Brown bg-Beige3 hover:bg-Dark-Brown hover:text-white flex justify-start items-center px-[16px] animate-fade-left"
-          onClick={handleNext}
+          onClick={() => handleNext(String(info.answers[1].score))}
         >
           {info.answers[1].option}
         </button>
       </div>
-      {id === 0 ? (
+      {id === 1 ? (
         <div className="w-full rounded-xl h-16 " />
       ) : (
         <button

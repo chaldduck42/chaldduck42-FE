@@ -1,7 +1,15 @@
 import { http, HttpResponse } from 'msw'
 
 export const handlers = [
-  http.get('/api/mbti', () => {
+  http.get('/api/test', () => {
+    return HttpResponse.json([
+      {
+        hello: 'hello',
+      },
+    ])
+  }),
+
+  http.get('/mbti/questions', () => {
     return HttpResponse.json({
       status: 200,
       message: '요청에 성공하였습니다.',
@@ -186,5 +194,8 @@ export const handlers = [
         ],
       },
     })
+  }),
+  http.post('/mbti/result', () => {
+    return HttpResponse.json('전송이 완료되었습니다.')
   }),
 ]
