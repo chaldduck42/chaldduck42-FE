@@ -1,27 +1,35 @@
 'use client'
 import ProgressNavBar from '@/components/mbti/ProgressNavBar'
 import SelectContent from '@/components/mbti/SelectContent'
-import { mbtiAtom } from '@/recoil/atom'
+import { QuestionList } from '@/types/mbti'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
-import React, { useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import React, { useEffect, useState } from 'react'
 
 const page = () => {
   const params = useParams()
-  const id = Number(params.id)
-  const mbtiQuestion = useRecoilValue(mbtiAtom)
-  const setMbtiQestion = useSetRecoilState(mbtiAtom)
+  const id = Number(params.id) - 1
+  const [type, setType] = useState<string>()
+  const [info, setInfo] = useState<QuestionList>()
 
   useEffect(() => {
-    axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mbti`).then((res) =>
-      setMbtiQestion(res.data.data),
-    )
-  }, [mbtiQuestion])
+    axios(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/questions`).then((res) => {
+      const data = res?.data.data
+      const category = Math.floor(id / 3)
+      const question = Math.floor(id % 3)
+      const types = data.mbti[category]?.type
+      const infos = data.mbti[category]?.questions[question]
+      // console.log(category, question)
+      if (types && infos) {
+        setType(types)
+        setInfo(infos)
+      }
+    })
+  }, [])
   return (
-    <div className="h-full">
+    <div className="w-full h-full bg-Beige1 relative ">
       <ProgressNavBar />
-      <SelectContent id={id} question={mbtiQuestion[id]} />
+      {info && type && <SelectContent id={id + 1} info={info} type={type} />}
     </div>
   )
 }
