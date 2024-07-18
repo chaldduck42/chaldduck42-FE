@@ -1,3 +1,4 @@
+'use client'
 import { QuestionList } from '@/types/mbti'
 import mbtiCaculate from '@/utils/mbtiCalculate'
 import axios from 'axios'
