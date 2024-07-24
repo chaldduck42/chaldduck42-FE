@@ -144,7 +144,14 @@ const Home: React.FC = () => {
         생년월일 출력 : ${state.birthdate}
       `)
 
-      router.push('/mbti/1')
+      //router.push('/mbti/1')
+
+      var sendData = {
+        nickname: state.nickname,
+        birth: state.birthdate.replaceAll('.', ''),
+      }
+      console.log(sendData)
+      //axios 요청 후 mbti 페이지로 이동
     }
   }
 
