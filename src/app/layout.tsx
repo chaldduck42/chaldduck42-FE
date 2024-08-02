@@ -11,7 +11,6 @@ const inter = Inter({ subsets: ['latin'] })
 const pretendard = localFont({
   src: '../../public/static/PretendardVariable.woff2',
   display: 'swap',
-  weight: '45 920',
   variable: '--font-pretendard',
 })
 
