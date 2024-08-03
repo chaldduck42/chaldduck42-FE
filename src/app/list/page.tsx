@@ -4,6 +4,8 @@ import React from 'react'
 import useObserver from '@/hooks/useObserver'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
+import RelationshipTag from '@/components/list/RelationshipTag'
+import NoCompatibilityMessage from '@/components/list/NoCompatibilityMessage'
 
 //import RelationshipTag from './layout'
 
@@ -20,6 +22,7 @@ const Home = () => {
 
   const observer1 = useObserver()
   const observer2 = useObserver()
+  const observer3 = useObserver()
 
   const [relationships, setRelationships] = useState<
     Array<{
@@ -29,8 +32,6 @@ const Home = () => {
   >([])
 
   useEffect(() => {
-    // This is where you would normally fetch data from an API
-    // For this example, we'll just set some mock data
     setRelationships([
       { type: 'best', text: '찰떡사이야' },
       { type: 'good', text: '꽤 좋은 사이야' },
@@ -81,14 +82,47 @@ const Home = () => {
                 />
               </div>
             </div>
-            <div className="text-[24px] font-bold">
-              어떤 친구가 나랑 궁합을 봤을까?
+            <div className=" left-[94px] top-[91px] text-base font-bold text-center text-[#2b1e08]">
+              <p>어떤 친구가 나랑 궁합 봤을까?</p>
             </div>
           </div>
-          <div className="h-[90px]" />
+
           <div
             ref={observer2.ref}
-            className={`${observer2.animationAppear} flex flex-col items-center`}
+            className={`${observer2.animationAppear} flex flex-col justify-start items-start left-6 top-[173px] gap-4`}
+            aria-hidden="true"
+          >
+            <RelationshipTag
+              friendNm="친구1"
+              type="best"
+              children="찰떡사이야"
+            />
+            <RelationshipTag
+              friendNm="친구2"
+              type="good"
+              children="꽤 좋은 사이야"
+            />
+            <RelationshipTag
+              friendNm="친구3"
+              type="ambiguous"
+              children="애매한 사이야"
+            />
+            <RelationshipTag
+              friendNm="친구4"
+              type="mediocre"
+              children="그저그런 사이야"
+            />
+            <RelationshipTag
+              friendNm="친구5"
+              type="mismatched"
+              children="엇갈린 사이야"
+            />
+            <NoCompatibilityMessage />
+          </div>
+
+          <div
+            ref={observer3.ref}
+            className={`${observer3.animationAppear} flex flex-col items-center`}
           >
             <div className="text-[13px] text-gray-500">
               결과는 최대 5개까지만 저장됩니다.
