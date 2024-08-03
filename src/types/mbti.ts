@@ -1,6 +1,6 @@
 export interface MbtiList {
   type: string
-  questions: QuestionList
+  questions: QuestionList[]
 }
 
 export interface QuestionList {
@@ -12,3 +12,15 @@ export interface Answer {
   option: string
   score: number
 }
+
+export interface Questions {
+  type: string
+  question: QuestionList
+}
+
+// [
+//   { type: 'EI', questions: [ [Object], [Object], [Object] ] },
+//   { type: 'SN', questions: [ [Object], [Object], [Object] ] },
+//   { type: 'TF', questions: [ [Object], [Object], [Object] ] },
+//   { type: 'JP', questions: [ [Object], [Object], [Object] ] }
+// ]

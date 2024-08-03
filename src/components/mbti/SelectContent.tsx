@@ -5,20 +5,25 @@ import React from 'react'
 interface Props {
   id: number
   info: QuestionList
-  type: string
 }
-
-const SelectContent = ({ id, info, type }: Props) => {
+const SelectContent = ({ id, info }: Props) => {
   const router = useRouter()
-  // console.log(info)
-  console.log(type)
-
+  const nickname = localStorage.getItem('userInfo ')
   const handlePrev = () => {
     router.push(`/mbti/${id - 1}`)
   }
-  const handleNext = () => {
-    console.log('클릭')
-    router.push(`/mbti/${id + 1}`)
+  const handleNext = (score: string) => {
+    localStorage.setItem(String(id), score)
+    if (id === 12) {
+      const result = mbtiCaculate()
+      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, {
+        nickname,
+        mbtiResultList: result,
+      })
+    } else {
+      router.push(`/mbti/${id + 1}`)
+    }
+
   }
   return (
     <div className="w-full flex flex-col justify-between items-center mt-[56px]">
@@ -56,5 +61,4 @@ const SelectContent = ({ id, info, type }: Props) => {
     </div>
   )
 }
-
 export default SelectContent
