@@ -28,7 +28,9 @@
     ".next/types/**/*.ts",
     "jest.config.js",
     "public/mockServiceWorker.js",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "src/app/list/layout.tsx.bak"
+
   ],
   "exclude": ["node_modules"]
 }
