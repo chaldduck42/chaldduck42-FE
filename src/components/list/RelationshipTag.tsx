@@ -1,17 +1,18 @@
 import React from 'react'
 
+interface RelationshipTagProps {
+  friendNm: React.ReactNode
+  particle: React.ReactNode
+  type: RelationshipType
+  children: React.ReactNode
+}
+
 type RelationshipType =
   | 'best'
   | 'good'
   | 'ambiguous'
   | 'mediocre'
   | 'mismatched'
-
-interface RelationshipTagProps {
-  friendNm: React.ReactNode
-  type: RelationshipType
-  children: React.ReactNode
-}
 
 const RelationshipTag: React.FC<RelationshipTagProps> = ({
   friendNm,
@@ -31,6 +32,23 @@ const RelationshipTag: React.FC<RelationshipTagProps> = ({
       case 'mismatched':
         return 'bg-[#97b3da]'
     }
+  }
+
+  const getRelationship = (name: string): boolean | null => {
+    if (typeof name !== 'string') return null
+
+    const lastLetter = name[name.length - 1]
+    const uni = lastLetter.charCodeAt(0)
+
+    if (uni < 44032 || uni > 55203) return null
+
+    return (uni - 44032) % 28 !== 0
+
+    // const isEndingWithBatchim = getRelationship(state.nickname)
+    // const newNM = isEndingWithBatchim
+    //   ? `${state.nickname}이랑`
+    //   : `${state.nickname}랑`
+    // 닉네임 값으로 이랑, 랑 붙여야함
   }
 
   return (
