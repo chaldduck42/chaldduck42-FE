@@ -17,7 +17,6 @@ const page: GetServerSideProps = async (context) => {
       const question = Math.floor(pageId % 3)
       type = data.mbti[category]?.type
       info = data.mbti[category]?.questions[question]
-      // console.log(category, question)
     },
   )
   return (
