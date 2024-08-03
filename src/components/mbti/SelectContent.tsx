@@ -22,7 +22,10 @@ const SelectContent = ({ id, info, type }: Props) => {
     localStorage.setItem(String(id), score)
     if (id === 12) {
       const result = mbtiCaculate()
-      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, result)
+      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, {
+        nickname: 'string',
+        mbtiResultList: result,
+      })
       console.log(result)
     } else {
       router.push(`/mbti/${id + 1}`)

@@ -21,7 +21,6 @@ html {
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: #fbf4ea;
 }
 body {
   .animation-appear {
@@ -36,6 +35,8 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+
+  background-color: #fbf4ea;
   width: 100%;
 }
 
