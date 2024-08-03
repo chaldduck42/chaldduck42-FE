@@ -11,6 +11,7 @@ interface Props {
 }
 const SelectContent = ({ id, info }: Props) => {
   const router = useRouter()
+  const nickname = localStorage.getItem('nickname')
   const handlePrev = () => {
     router.push(`/mbti/${id - 1}`)
   }
@@ -19,7 +20,7 @@ const SelectContent = ({ id, info }: Props) => {
     if (id === 12) {
       const result = mbtiCaculate()
       axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, {
-        nickname: 'string',
+        nickname,
         mbtiResultList: result,
       })
     } else {
