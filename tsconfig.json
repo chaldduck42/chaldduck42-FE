@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "jest.config.js",
-    "public/mockServiceWorker.js"
+    "public/mockServiceWorker.js",
+    "src/app/list/layout.tsx.bak"
   ],
   "exclude": ["node_modules"]
 }
