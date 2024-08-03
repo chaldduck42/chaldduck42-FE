@@ -8,17 +8,13 @@ import React from 'react'
 interface Props {
   id: number
   info: QuestionList
-  type: string
 }
-const SelectContent = ({ id, info, type }: Props) => {
+const SelectContent = ({ id, info }: Props) => {
   const router = useRouter()
-  // console.log(info)
-  console.log(type)
   const handlePrev = () => {
     router.push(`/mbti/${id - 1}`)
   }
   const handleNext = (score: string) => {
-    console.log('hello')
     localStorage.setItem(String(id), score)
     if (id === 12) {
       const result = mbtiCaculate()
@@ -26,7 +22,6 @@ const SelectContent = ({ id, info, type }: Props) => {
         nickname: 'string',
         mbtiResultList: result,
       })
-      console.log(result)
     } else {
       router.push(`/mbti/${id + 1}`)
     }
