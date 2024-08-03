@@ -91,6 +91,7 @@ const config: Config = {
         Beige2: '#FBF4EA',
         Beige3: '#F9EFE1',
         Beige: '#FDFAF5',
+        Gray5: '#A3A3A3',
         'Secondary-Green': '#C2E679',
         'Secondary-Red': '#F69877',
         'Secondary-Hollow-Red': '#FDEAE3',

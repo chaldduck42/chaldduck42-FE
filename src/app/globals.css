@@ -21,7 +21,6 @@ html {
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: #fbf4ea;
 }
 body {
   .animation-appear {
@@ -36,18 +35,49 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+
+  background-color: #fbf4ea;
   width: 100%;
 }
 
-@layer base {
+@layer utilities {
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+
+/* @layer base {
   @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
       format('woff');
     font-weight: 600;
     font-style: normal;
+
+  }
+} */
+
+.fade-in-left {
+  animation: fadeInLeft 0.5s ease-in-out;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-@layer utilities {
+.fade-in-left {
+  animation: fadeInLeft 0.5s ease-in-out;
 }
