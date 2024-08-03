@@ -11,7 +11,7 @@ interface Props {
 }
 const SelectContent = ({ id, info }: Props) => {
   const router = useRouter()
-  const nickname = localStorage.getItem('nickname')
+  const nickname = localStorage.getItem('userInfo ')
   const handlePrev = () => {
     router.push(`/mbti/${id - 1}`)
   }
