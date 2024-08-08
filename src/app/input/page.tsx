@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 // 인터페이스 정의
 interface FormState {
@@ -111,18 +112,7 @@ const Home: React.FC = () => {
     }
   }
 
-  const getRelationship = (name: string): boolean | null => {
-    if (typeof name !== 'string') return null
-
-    const lastLetter = name[name.length - 1]
-    const uni = lastLetter.charCodeAt(0)
-
-    if (uni < 44032 || uni > 55203) return null
-
-    return (uni - 44032) % 28 !== 0
-  }
-
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (state.nickname === '' || state.birthdate === '') {
       if (state.nickname === '') {
         nicknameRef.current?.focus()
@@ -130,21 +120,26 @@ const Home: React.FC = () => {
         birthdateRef.current?.focus()
       }
       alert('닉네임과 생년월일을 모두 입력해 주세요.')
-    } else if (state.birthdate.length < 8) {
+    } else if (state.birthdate.replaceAll('.', '').length < 8) {
       birthdateRef.current?.focus()
       alert('생년월일을 잘못 입력하셨습니다.')
     } else if (state.nicknameComplete && state.birthdateComplete) {
-      const isEndingWithBatchim = getRelationship(state.nickname)
-      const newNM = isEndingWithBatchim
-        ? `${state.nickname}이랑`
-        : `${state.nickname}랑`
-      alert(`
-        디버그용
-        별명 뒤 조사 붙이기 : ${newNM} 
-        생년월일 출력 : ${state.birthdate}
-      `)
+      var sendData = {
+        nickname: state.nickname,
+        birth: state.birthdate.replaceAll('.', ''),
+      }
 
-      router.push('/mbti/1')
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/info`,
+          sendData,
+        )
+
+        localStorage.setItem('userInfo', JSON.stringify(sendData))
+        router.push('/mbti')
+      } catch (error) {
+        console.error('Error:', error)
+      }
     }
   }
 
