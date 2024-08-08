@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 const pretendard = localFont({
   src: '../../public/static/PretendardVariable.woff2',
   display: 'swap',
+  weight: '45 920',
   variable: '--font-pretendard',
 })
 
@@ -25,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="kr" className={`${pretendard.variable}`}>
       <body
-        className={`${inter.className} ${pretendard.variable} flex justify-center`}
+        className={`${inter.className} ${pretendard.className} flex justify-center`}
       >
         <MSWComponent />
         <TanstackProvider>
