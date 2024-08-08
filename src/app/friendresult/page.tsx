@@ -1,59 +1,26 @@
 'use client'
-import { Suspense, useState, useEffect } from 'react'
+import { Suspense } from 'react'
 import Charts from '@/components/charts/Charts'
 import { useSearchParams } from 'next/navigation'
 import useObserver from '@/hooks/useObserver'
-import axios from 'axios'
 import Image from 'next/image'
 import Download from '../../../public/svgs/download.svg'
-import SvgLink from '../../../public/svgs/link.svg'
-
-interface IapiData {
-  fiveHang: string
-  description: string
-}
 
 const Home = () => {
   const searchParams = useSearchParams()
-  const [apiData, setApiData] = useState<IapiData>()
   const bg = searchParams.get('bg')
   const fruits = searchParams.get('fruits')
 
-  useEffect(() => {
-    const getApiData = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/saju/result/갑자`,
-      )
-      const responseData = response.data
-      setApiData(responseData)
-    }
-    getApiData()
-  }, [])
-  // console.log(apiData, 'apiData')
   // 리팩토링 예정
   const observer1 = useObserver()
   const observer2 = useObserver()
   const observer3 = useObserver()
   const observer4 = useObserver()
-  const observer5 = useObserver()
   const observer6 = useObserver()
   const observer7 = useObserver()
   const observer8 = useObserver()
   const observer9 = useObserver()
-
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      alert('클립보드에 복사되었습니다.')
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const handleCopyClick = () => {
-    const textToCopy = `${process.env.NEXT_PUBLIC_BASE_URL},/camp/detail/` // 복사하고 싶은 텍스트
-    copyToClipboard(textToCopy)
-  }
+  const observer10 = useObserver()
 
   return (
     <div className=" flex flex-col items-center font-[Pretendard-Regular]">
@@ -82,10 +49,10 @@ const Home = () => {
             className={`${observer2.animationAppear} flex flex-col items-center`}
           >
             <div className="text-[18px] font-bold text-Dark-Brown">
-              썸머님은{apiData?.fiveHang}
+              썸머님은
             </div>
             <div className="text-[24px] font-bold text-Dark-Brown">
-              리더십 있는{apiData?.description}
+              리더십 있는
             </div>
             <div className="text-[24px] font-bold text-Dark-Brown">
               메론 자두 찹쌀떡
@@ -123,35 +90,17 @@ const Home = () => {
       </Suspense>
       <div className="relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px]">
         <div
-          ref={observer5.ref}
-          className={`${observer5.animationAppear} w-[335px] mt-[40px] flex flex-col items-center text-center`}
+          ref={observer9.ref}
+          className={`${observer9.animationAppear} relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px]`}
         >
-          <p className="font-bold mb-2 text-Dark-Brown">
-            나랑 찰떡궁합인 친구 &#x1F60D;
-          </p>
-          <div className="bg-Background-Beige3 rounded-2xl w-[335px] h-[156px] p-4">
-            <p className="text-brown">내가 남자라면</p>
-            <p className="font-bold mt-1 text-Dark-Brown">
-              예리한 청포도 코코넛 찹쌀떡
+          <div className="w-[335px] mt-[20px] flex flex-col items-center text-centerrounded-2xl py-6">
+            <p className="mb-[10px] font-bold text-Dark-Brown text-[20px]">
+              썸머 & 찰떡이
             </p>
-
-            <p className="mt-3 text-brown">내가 여자라면</p>
-            <p className="font-bold mt-1 text-Dark-Brown">
-              예리한 청포도 코코넛 찹쌀떡
-            </p>
-          </div>
-          <p className="font-bold mt-8 mb-2 text-Dark-Brown">
-            나랑 개떡궁합인 친구 &#x1F625;
-          </p>
-          <div className="bg-Background-Beige3 rounded-2xl w-[335px] h-[156px] p-4">
-            <p className="text-brown">내가 남자라면</p>
-            <p className="font-bold mt-1 text-Dark-Brown">
-              예리한 청포도 코코넛 찹쌀떡
-            </p>
-
-            <p className="mt-3 text-brown">내가 여자라면</p>
-            <p className="font-bold mt-1 text-Dark-Brown">
-              예리한 청포도 코코넛 찹쌀떡
+            <p className="mt-4 font-medium text-Dark-Brown text-[20px]">
+              <span className="font-bold bg-Secondary-Grpae p-4 rounded-lg">
+                꽤 좋은 사이야
+              </span>
             </p>
           </div>
         </div>
@@ -173,6 +122,18 @@ const Home = () => {
             content="사주"
             starCount={3}
           />
+        </div>
+        <div
+          ref={observer10.ref}
+          className={`${observer10.animationAppear} relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px]`}
+        >
+          <div className="w-[335px] mt-[20px] flex flex-col items-center bg-Background-Beige3 rounded-2xl py-6">
+            <p className="mb-[10px] font-bold text-Dark-Brown p-4 text-[18px]">
+              썸머님은 독고다이 망고 메론 찹쌀떡이에요. 정열적인 딸기 사과
+              찹쌀떡인 보보보보보님과는 성격보다는 타고난 궁합이 더 좋아요. 이미
+              충분히 사이가 좋지만, 더 친해질 수 있는 가능성이 남았어요!
+            </p>
+          </div>
         </div>
         <div
           ref={observer7.ref}
@@ -212,31 +173,12 @@ const Home = () => {
           </p>
         </div>
 
-        <div
-          ref={observer9.ref}
-          className={`${observer9.animationAppear} relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px]`}
-        >
-          <div className="w-[335px] mt-[20px] flex flex-col items-center text-center bg-Background-Beige3 rounded-2xl py-6">
-            <p className="mb-[10px] font-bold text-Dark-Brown">썸머 & 찰떡이</p>
-            <p className="font-medium text-Dark-Brown">
-              우리는
-              <span className="ml-1 font-bold bg-Secondary-Grpae px-2 py-1 rounded-lg">
-                꽤 좋은 사이야
-              </span>
-            </p>
-          </div>
-        </div>
         <div className="my-[32px] w-[335px] px-6 py-4 bg-Dark-Brown rounded-2xl text-white text-center">
-          카카오톡으로 공유
+          다른 친구와 궁합 보기
         </div>
-        <button
-          className="my-[32px] flex items-center justify-center text-Dark-Brown underline font-bold space-x-2"
-          onClick={handleCopyClick}
-          type="button"
-        >
-          <SvgLink width={20} height={20} className="inline-block" />
-          <span>링크 복사</span>
-        </button>
+        <div className="my-[32px] flex items-center justify-center text-Gray font-bold space-x-2">
+          <span>위 버튼을 클릭하면 나만의 고유 링크가 생성돼요.</span>
+        </div>
         <div className="my-[32px] flex items-center justify-center text-Dark-Brown underline font-bold space-x-2">
           <Download width={20} height={20} className="inline-block" />
           <span>결과 이미지로 저장</span>
