@@ -26,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script defer src="https://developers.kakao.com/sdk/js/kakao.min.js" />
+      </head>
       <body
         className={`${inter.className} ${pretendard.variable} flex justify-center`}
       >
