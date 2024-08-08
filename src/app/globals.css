@@ -53,7 +53,7 @@ body {
     transform: translateX(0);
   }
 }
-
+/* 
 @layer base {
   @font-face {
     font-family: 'Pretendard-Regular';
@@ -66,7 +66,10 @@ body {
 
 .font-pretendards {
   font-family: 'Pretendard-Regular';
-}
+} */
+/* .font-noto_sans_kr {
+  font-family: var(--font-noto_sans_kr);
+} */
 
 .fade-in-left {
   animation: fadeInLeft 0.5s ease-in-out;

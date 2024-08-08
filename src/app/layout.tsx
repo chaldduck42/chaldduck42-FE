@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+
 import './globals.css'
 import TanstackProvider from '@/components/providers/TanstackProvider'
 import RecoilRootProvider from '@/components/providers/RecoilRootProvider'
 import MSWComponent from '@/components/msw/MSWComponent'
 import localFont from 'next/font/local'
-
-const inter = Inter({ subsets: ['latin'] })
 
 const pretendard = localFont({
   src: '../../public/static/PretendardVariable.woff2',
@@ -27,9 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
-      <body
-        className={`${inter.className} ${pretendard.className} flex justify-center`}
-      >
+      <body className={` ${pretendard.className} flex justify-center`}>
         <MSWComponent />
         <TanstackProvider>
           <RecoilRootProvider>{children}</RecoilRootProvider>
