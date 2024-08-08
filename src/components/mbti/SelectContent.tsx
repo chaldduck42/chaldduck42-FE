@@ -3,26 +3,49 @@ import { QuestionList } from '@/types/mbti'
 import mbtiCaculate from '@/utils/mbtiCalculate'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface Props {
   id: number
   info: QuestionList
 }
+
 const SelectContent = ({ id, info }: Props) => {
+  const [nickname, setNickname] = useState()
+  useEffect(() => {
+    // 클라이언트 사이드에서만 실행되도록 함
+    if (typeof window !== 'undefined') {
+      const userInfo = localStorage.getItem('userInfo')
+      if (userInfo) {
+        setNickname(JSON.parse(userInfo).nickname)
+      }
+    }
+  }, [])
   const router = useRouter()
-  const nickname = localStorage.getItem('userInfo')
   const handlePrev = () => {
     router.push(`/mbti/${id - 1}`)
   }
-  const handleNext = (score: string) => {
+  const handleNext = async (score: string) => {
     localStorage.setItem(String(id), score)
+    console.log(id)
     if (id === 12) {
       const result = mbtiCaculate()
-      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, {
-        nickname,
-        mbtiResultList: result,
-      })
+      console.log(result)
+      await axios
+        .post(`${process.env.NEXT_PUBLIC_BASE_URL}/mbti/result`, {
+          nickname,
+          mbtiResultList: result,
+        })
+        .then((res) => {
+          for (let i: number = 1; i < 13; i += 1) {
+            localStorage.removeItem(String(i))
+          }
+          localStorage.removeItem('userInfo')
+          localStorage.setItem('mbti', res.data.mbti)
+          // router.push('') 어디로 이동할지 안정함
+        })
+
+      console.log('실행됨')
     } else {
       router.push(`/mbti/${id + 1}`)
     }
