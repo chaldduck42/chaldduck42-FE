@@ -1,13 +1,7 @@
-import FirstRending from '@/components/rending/First_page'
-import SecondRending from '@/components/rending/Second_page'
+import Rendering from '@/components/rending/Rendering'
 
 const Home = () => {
-  return (
-    <div className="  flex flex-col items-center justify-between ">
-      <FirstRending />
-      <SecondRending />
-    </div>
-  )
+  return <Rendering />
 }
 
 export default Home

@@ -7,9 +7,9 @@ import Menu from '../../../public/svgs/menu.svg'
 
 const FirstRending = () => {
   return (
-    <div className="bg-gradient-to-b from-[#F0D9B8] to-[#FDFAF5] h-screen min-w-[375px] max-[600px] pt-[22px] flex flex-col justify-between items-center animate-fade">
+    <div className="bg-gradient-to-b from-[#F0D9B8] to-[#FDFAF5] h-screen min-w-[375px] max-[600px] pt-[22px] flex flex-col justify-between items-center animate-fade ">
       <div>
-        <div className="flex w-full justify-between px-[16px] animate-fade">
+        <div className=" flex w-full justify-between px-[16px] animate-fade">
           <Ducck />
           <Menu />
         </div>
