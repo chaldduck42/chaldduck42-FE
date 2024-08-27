@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
+// import axios from 'axios'
 
 // 인터페이스 정의
 interface FormState {
@@ -124,19 +124,19 @@ const Home: React.FC = () => {
       birthdateRef.current?.focus()
       alert('생년월일을 잘못 입력하셨습니다.')
     } else if (state.nicknameComplete && state.birthdateComplete) {
-      var sendData = {
+      const sendData = {
         nickname: state.nickname,
         birth: state.birthdate.replaceAll('.', ''),
       }
 
       try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/user/info`,
-          sendData,
-        )
+        // const response = await axios.post(
+        //   `${process.env.NEXT_PUBLIC_BASE_URL}/user/info`,
+        //   sendData,
+        // )
 
         localStorage.setItem('userInfo', JSON.stringify(sendData))
-        router.push('/mbti')
+        router.push('/mbti/1')
       } catch (error) {
         console.error('Error:', error)
       }

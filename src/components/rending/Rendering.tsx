@@ -1,16 +1,19 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import FirstRending from './FirstRendering'
 import SecondRending from './SecondRendering'
 import ThirdRendering from './ThirdRendering'
 import FifthRendering from './FifthRendering'
 
 const Rendering = () => {
+  const router = useRouter()
   const [order, setOrder] = useState<number>(1)
   const handleNext = () => {
+    console.log(order)
     if (order === 4) {
-      console.log('넘기기')
+      router.push('/input')
     } else {
       setOrder((prev) => prev + 1)
     }
