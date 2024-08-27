@@ -109,6 +109,9 @@ const config: Config = {
         sm: '375px',
         md: '600px',
       },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
     },
   },
   // eslint-disable-next-line
