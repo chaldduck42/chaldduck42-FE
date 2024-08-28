@@ -1,11 +1,7 @@
-'use client'
+import Rendering from '@/components/rending/Rendering'
 
 const Home = () => {
-  return (
-    <div>
-      <a href="/input">내 사주 알아보기</a>
-    </div>
-  )
+  return <Rendering />
 }
 
 export default Home
