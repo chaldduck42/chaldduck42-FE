@@ -24,6 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={` ${pretendard.className} flex justify-center`}>
         <MSWComponent />

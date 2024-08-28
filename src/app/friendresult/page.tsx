@@ -1,15 +1,35 @@
 'use client'
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import Charts from '@/components/charts/Charts'
 import { useSearchParams } from 'next/navigation'
 import useObserver from '@/hooks/useObserver'
 import Image from 'next/image'
+import axios from 'axios'
+import { captureResult } from '@/utils/captureResult'
 import Download from '../../../public/svgs/download.svg'
+
+interface IapiData {
+  fiveHang: string
+  description: string
+}
 
 const Home = () => {
   const searchParams = useSearchParams()
+
+  const [apiData, setApiData] = useState<IapiData>()
   const bg = searchParams.get('bg')
   const fruits = searchParams.get('fruits')
+
+  useEffect(() => {
+    const getApiData = async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/saju/result/갑자`,
+      )
+      const responseData = response.data
+      setApiData(responseData)
+    }
+    getApiData()
+  }, [])
 
   // 리팩토링 예정
   const observer1 = useObserver()
@@ -28,6 +48,7 @@ const Home = () => {
         <div
           className="relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px] bg-no-repeat pb-[30px]"
           style={{ backgroundImage: `url('/images/bg/${bg}.png')` }}
+          id="capture-area"
         >
           <div
             ref={observer1.ref}
@@ -49,7 +70,7 @@ const Home = () => {
             className={`${observer2.animationAppear} flex flex-col items-center`}
           >
             <div className="text-[18px] font-bold text-Dark-Brown">
-              썸머님은
+              썸머님은{apiData?.description}
             </div>
             <div className="text-[24px] font-bold text-Dark-Brown">
               리더십 있는
@@ -75,7 +96,7 @@ const Home = () => {
           </div>
           <div
             ref={observer4.ref}
-            className={`${observer4.animationAppear} rounded-2xl p-4 bg-Background-Beige3/40 w-[335px] border-[1px] border-Background-Beige3 leading-[25.6px]`}
+            className={`${observer4.animationAppear}  rounded-2xl p-4 bg-Background-Beige3/40 w-[335px] border-[1px] border-Background-Beige3 leading-[25.6px]`}
           >
             당신은 태양 중에서도 한낮에 떠있는 가장 뜨거운 태양이에요. 한번 정한
             목표에 대해 집중력이 뛰어나고 달성하기까지 곁길로 새지 않아요. 이런
@@ -128,7 +149,7 @@ const Home = () => {
           className={`${observer10.animationAppear} relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px]`}
         >
           <div className="w-[335px] mt-[20px] flex flex-col items-center bg-Background-Beige3 rounded-2xl py-6">
-            <p className="mb-[10px] font-bold text-Dark-Brown p-4 text-[18px]">
+            <p className="mb-[10px] font-medium text-Dark-Brown p-4 text-[18px]">
               썸머님은 독고다이 망고 메론 찹쌀떡이에요. 정열적인 딸기 사과
               찹쌀떡인 보보보보보님과는 성격보다는 타고난 궁합이 더 좋아요. 이미
               충분히 사이가 좋지만, 더 친해질 수 있는 가능성이 남았어요!
@@ -179,10 +200,14 @@ const Home = () => {
         <div className="my-[32px] flex items-center justify-center text-Gray font-bold space-x-2">
           <span>위 버튼을 클릭하면 나만의 고유 링크가 생성돼요.</span>
         </div>
-        <div className="my-[32px] flex items-center justify-center text-Dark-Brown underline font-bold space-x-2">
+        <button
+          type="button"
+          onClick={captureResult}
+          className="my-[32px] flex items-center justify-center text-Dark-Brown underline font-bold space-x-2"
+        >
           <Download width={20} height={20} className="inline-block" />
           <span>결과 이미지로 저장</span>
-        </div>
+        </button>
       </div>
     </div>
   )

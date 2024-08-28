@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation'
 import useObserver from '@/hooks/useObserver'
 import axios from 'axios'
 import Image from 'next/image'
+import { captureResult } from '@/utils/captureResult'
+import Loading from '@/components/loading/Loading'
 import Download from '../../../public/svgs/download.svg'
 import SvgLink from '../../../public/svgs/link.svg'
 
@@ -29,7 +31,6 @@ const Home = () => {
     }
     getApiData()
   }, [])
-  // console.log(apiData, 'apiData')
   // 리팩토링 예정
   const observer1 = useObserver()
   const observer2 = useObserver()
@@ -42,12 +43,8 @@ const Home = () => {
   const observer9 = useObserver()
 
   const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      alert('클립보드에 복사되었습니다.')
-    } catch (error) {
-      console.error(error)
-    }
+    await navigator.clipboard.writeText(text)
+    alert('클립보드에 복사되었습니다.')
   }
 
   const handleCopyClick = () => {
@@ -57,10 +54,11 @@ const Home = () => {
 
   return (
     <div className=" flex flex-col items-center font-[Pretendard-Regular]">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <div
           className="relative flex flex-col items-center sm:mx-auto sm:w-full md:w-[600px] bg-no-repeat pb-[30px]"
           style={{ backgroundImage: `url('/images/bg/${bg}.png')` }}
+          id="capture-area"
         >
           <div
             ref={observer1.ref}
@@ -82,10 +80,10 @@ const Home = () => {
             className={`${observer2.animationAppear} flex flex-col items-center`}
           >
             <div className="text-[18px] font-bold text-Dark-Brown">
-              썸머님은{apiData?.fiveHang}
+              썸머님은{apiData?.description}
             </div>
             <div className="text-[24px] font-bold text-Dark-Brown">
-              리더십 있는{apiData?.description}
+              리더십 있는
             </div>
             <div className="text-[24px] font-bold text-Dark-Brown">
               메론 자두 찹쌀떡
@@ -95,7 +93,7 @@ const Home = () => {
             ref={observer3.ref}
             className={`${observer3.animationAppear} w-[375px] h-[309px] relative mb-[44px]`}
           >
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <Image
                 src={`/images/fruits/${fruits}.png`}
                 alt="fruits"
@@ -237,10 +235,14 @@ const Home = () => {
           <SvgLink width={20} height={20} className="inline-block" />
           <span>링크 복사</span>
         </button>
-        <div className="my-[32px] flex items-center justify-center text-Dark-Brown underline font-bold space-x-2">
+        <button
+          onClick={captureResult}
+          type="button"
+          className="my-[32px] flex items-center justify-center text-Dark-Brown underline font-bold space-x-2"
+        >
           <Download width={20} height={20} className="inline-block" />
           <span>결과 이미지로 저장</span>
-        </div>
+        </button>
       </div>
     </div>
   )
