@@ -23,7 +23,7 @@ interface listResp {
 }
 
 const Home: React.FC<HomeProps> = () => {
-  const [reqData, setReqData] = useState<listResp>()
+  const [reqData, setReqData] = useState<listResp[] | undefined>(undefined) // reqData는 배열이거나 undefined일 수 있음
 
   const observer1 = useObserver()
   const observer2 = useObserver()
@@ -106,48 +106,57 @@ const Home: React.FC<HomeProps> = () => {
               <p>어떤 친구가 나랑 궁합 봤을까?</p>
             </div>
           </div>
+        </div>
+        <div
+          ref={observer2.ref}
+          className={`${observer2.animationAppear} flex flex-col justify-start items-start left-6 top-[173px] gap-4`}
+        >
+          {/* <RelationshipTag
+            friendNm="받침있으면이랑임당"
+            type="best"
+            children="찰떡사이야"
+          />
+          <RelationshipTag
+            friendNm="받침없으면랑이다"
+            type="good"
+            children="꽤 좋은 사이야"
+          />
+          <RelationshipTag
+            friendNm="이상연"
+            type="ambiguous"
+            children="애매한 사이야"
+          />
+          <RelationshipTag
+            friendNm="받침없어"
+            type="mediocre"
+            children="그저그런 사이야"
+          />
+          <RelationshipTag
+            friendNm="받침있담"
+            type="mismatched"
+            children="엇갈린 사이야"
+          /> */}
 
-          <div
-            ref={observer2.ref}
-            className={`${observer2.animationAppear} flex flex-col justify-start items-start left-6 top-[173px] gap-4`}
-          >
-            <RelationshipTag
-              friendNm="친구1"
-              particle="이랑"
-              type="best"
-              children="찰떡사이야"
-            />
-            <RelationshipTag
-              friendNm="친구2"
-              particle="이랑"
-              type="good"
-              children="꽤 좋은 사이야"
-            />
-            <RelationshipTag
-              friendNm="친구3"
-              particle="이랑"
-              type="ambiguous"
-              children="애매한 사이야"
-            />
-            <RelationshipTag
-              friendNm="친구4"
-              particle="이랑"
-              type="mediocre"
-              children="그저그런 사이야"
-            />
-            <RelationshipTag
-              friendNm="친구5"
-              particle="랑"
-              type="mismatched"
-              children="엇갈린 사이야"
-            />
+          {/* reqData가 존재하는지 체크하고, 배열일 경우에만 map 함수를 사용 */}
+          {reqData && reqData.length > 0 ? (
+            reqData.map((friend, index) => (
+              <RelationshipTag
+                key={friend.userId} // 고유한 키 값
+                friendNm={friend.nickname} // 친구 닉네임
+                type={relationships[index % relationships.length].type} // 관계 타입 순환
+                children={relationships[index % relationships.length].text} // 관계 텍스트 순환
+              />
+            ))
+          ) : (
             <NoCompatibilityMessage />
-          </div>
+          )}
+        </div>
 
-          <div
-            ref={observer3.ref}
-            className={`${observer3.animationAppear} flex flex-col items-center`}
-          >
+        <div
+          ref={observer3.ref}
+          className={`${observer3.animationAppear} flex flex-col items-center`}
+        >
+          <div className="my-[32px] flex flex-col items-center justify-center text-Gray font-bold space-y-2">
             <div className="text-[13px] text-gray-500">
               결과는 최대 5개까지만 저장됩니다.
             </div>
@@ -163,25 +172,4 @@ const Home: React.FC<HomeProps> = () => {
     </div>
   )
 }
-
-// `getServerSideProps` 함수를 사용하여 서버 측에서 데이터를 가져옵니다.
-// export const getServerSideProps = async () => {
-//   let reqData = null
-
-//   try {
-//     const response = await axios.get(
-//       `${process.env.NEXT_PUBLIC_BASE_URL}/friend/list/${process.env.DUMMY_USR_HASH}`,
-//     )
-//     reqData = response.data
-//   } catch (error) {
-//     console.error('Error fetching data:', error)
-//   }
-
-//   return {
-//     props: {
-//       reqData,
-//     },
-//   }
-// }
-
 export default Home

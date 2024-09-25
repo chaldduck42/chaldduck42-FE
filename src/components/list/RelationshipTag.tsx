@@ -2,7 +2,6 @@ import React from 'react'
 
 interface RelationshipTagProps {
   friendNm: React.ReactNode
-  // particle: React.ReactNode
   type: RelationshipType
   children: React.ReactNode
 }
@@ -16,11 +15,9 @@ type RelationshipType =
 
 const RelationshipTag: React.FC<RelationshipTagProps> = ({
   friendNm,
-  particle,
   type,
   children,
 }) => {
-  console.log(type)
   const getBackgroundColor = () => {
     switch (type) {
       case 'best':
@@ -38,22 +35,33 @@ const RelationshipTag: React.FC<RelationshipTagProps> = ({
     }
   }
 
-  // const getRelationship = (name: string): boolean | null => {
-  //   if (typeof name !== 'string') return null
+  const getRelationshipCmt = () => {
+    switch (type) {
+      case 'best':
+        return '찰떡사이야'
+      case 'good':
+        return '꽤 좋은 사이야'
+      case 'ambiguous':
+        return '애매한 사이야'
+      case 'mediocre':
+        return '그저그런 사이야'
+      case 'mismatched':
+        return '엇갈린 사이야'
+      default:
+        return 'error'
+    }
+  }
 
-  //   const lastLetter = name[name.length - 1]
-  //   const uni = lastLetter.charCodeAt(0)
+  const getRelationship = (name: string): boolean | null => {
+    if (typeof name !== 'string') return null
 
-  //   if (uni < 44032 || uni > 55203) return null
+    const lastLetter = name[name.length - 1]
+    const uni = lastLetter.charCodeAt(0)
 
-  //   return (uni - 44032) % 28 !== 0
+    if (uni < 44032 || uni > 55203) return null
 
-  // const isEndingWithBatchim = getRelationship(state.nickname)
-  // const newNM = isEndingWithBatchim
-  //   ? `${state.nickname}이랑`
-  //   : `${state.nickname}랑`
-  // 닉네임 값으로 이랑, 랑 붙여야함
-  // }
+    return (uni - 44032) % 28 !== 0
+  }
 
   return (
     <div className="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[327px] px-4 py-5 rounded-2xl bg-[#fbf4ea]">
@@ -64,7 +72,7 @@ const RelationshipTag: React.FC<RelationshipTagProps> = ({
               {friendNm}
             </p>
             <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#2b1e08]">
-              랑
+              {getRelationship(friendNm as string) ? `이랑` : `랑`}
             </p>
           </div>
         </div>
@@ -72,7 +80,8 @@ const RelationshipTag: React.FC<RelationshipTagProps> = ({
           className={`flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 px-2 py-1 rounded-xl ${getBackgroundColor()}`}
         >
           <p className="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#2b1e08]">
-            {children}
+            {/* {children} */}
+            {getRelationshipCmt()}
           </p>
         </div>
       </div>
