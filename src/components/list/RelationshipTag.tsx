@@ -16,6 +16,7 @@ type RelationshipType =
 
 const RelationshipTag: React.FC<RelationshipTagProps> = ({
   friendNm,
+  particle,
   type,
   children,
 }) => {
